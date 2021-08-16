@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tasks as $tasks)
+                @foreach ($tasks as $task)
                 <tr>
                     <td>{{ $task->id }}</td>
                     <td>{{ $task->content }}</td>
@@ -21,6 +21,9 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
+   @endif
+
+    {{-- メッセージ作成ページへのリンク --}}
+    {!! link_to_route('tasks.create', '新規タスクの登録', [], ['class' => 'btn btn-primary']) !!}
 
 @endsection
