@@ -45,24 +45,25 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
+        // バリデーション
+        $request->validate([
+            'status' => 'required|max:255',   // 追加
+            'content' => 'required|max:255',
+        ]);
+
         // メッセージを作成
         $task = new Task;
+        $task->status = $request->status;    // 追加
         $task->content = $request->content;
         $task->save();
 
         // トップページへリダイレクトさせる
         return redirect('/');
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         // idの値でメッセージを検索して取得
@@ -97,18 +98,25 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
+        // バリデーション
+        $request->validate([
+            'status' => 'required|max:10',   // 追加
+            'content' => 'required',
+        ]);
+
         // idの値でメッセージを検索して取得
-        $task = Task::findOrFail($id);
+        $task = Message::findOrFail($id);
         // メッセージを更新
+        $task->status= $request->status;    // 追加
         $task->content = $request->content;
         $task->save();
 
         // トップページへリダイレクトさせる
         return redirect('/');
     }
-
     /**
      * Remove the specified resource from storage.
      *
