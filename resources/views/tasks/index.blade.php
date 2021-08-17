@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <th>id</th>
+                    <th>status</th>
                     <th>task</th>
                 </tr>
             </thead>
